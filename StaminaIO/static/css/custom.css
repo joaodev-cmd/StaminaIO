@@ -1,0 +1,9 @@
+.logo img {
+    max-width: 100px;
+    height: auto; /* Mantém a proporção da imagem */
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+}
