@@ -1,0 +1,16 @@
+{% extends '_base.html' %}
+
+{% block content %}
+    <h2>Lista de Funcionários</h2>
+    <a href="{% url 'listar_pessoas' %}">voltar</a>
+    <a href="{% url 'adicionar_funcionario' %}">Adicionar Funcionário</a>
+    <ul>
+        {% for funcionario in funcionarios %}
+            <li>
+                {{ funcionario.nome }} - {{ funcionario.cpf }} - {{ funcionario.idade }}
+                <a href="{% url 'editar_funcionario' funcionario.pk %}">Editar</a> 
+                <a href="{% url 'deletar_funcionario' funcionario.pk %}">Deletar</a>
+            </li>
+        {% endfor %}
+    </ul>
+{% endblock %}

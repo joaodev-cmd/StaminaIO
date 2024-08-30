@@ -1,0 +1,10 @@
+{% extends '_base.html' %}
+
+{% block content %}
+    <h2>Tem certeza que deseja deletar este item?</h2>
+    <form method="post">
+        {% csrf_token %}
+        <button type="submit">Sim, deletar</button>
+        <a href="javascript:history.back()">Cancelar</a>
+    </form>
+{% endblock %}
