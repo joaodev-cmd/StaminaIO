@@ -1,0 +1,14 @@
+{% extends '_base.html' %}
+
+{% block title %}Confirmar Deletar{% endblock %}
+
+{% block content %}
+    <h1>Deletar Equipamento</h1>
+    <p>Tem certeza que deseja deletar o equipamento "{{ object.nome }}"?</p>
+    <form method="post">
+        {% csrf_token %}
+        <button type="submit">Sim, deletar</button>
+    </form>
+    <a href="{% url 'listar_equipamentos' %}">Cancelar</a>
+{% endblock %}
+v

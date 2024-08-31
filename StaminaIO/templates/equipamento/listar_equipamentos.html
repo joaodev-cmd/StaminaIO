@@ -1,0 +1,78 @@
+{% extends '_base.html' %}
+
+{% block title %}Lista de Equipamentos{% endblock %}
+
+{% block content %}
+    <h1>Lista de Equipamentos</h1>
+    <a href="{% url 'adicionar_equipamento' %}" class="btn">Adicionar Equipamento</a>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Nome</th>
+                <th>Quantidade</th>
+                <th>Status</th>
+                <th>Descrição</th>
+                <th>Ações</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for equipamento in equipamentos %}
+            <tr>
+                <td>{{ equipamento.nome }}</td>
+                <td>{{ equipamento.quantidade }}</td>
+                <td>{{ equipamento.status }}</td>
+                <td>{{ equipamento.descricao }}</td>
+                <td>
+                    <a href="{% url 'editar_equipamento' equipamento.pk %}" class="btn">Editar</a>
+                    <a href="{% url 'deletar_equipamento' equipamento.pk %}" class="btn btn-danger">Deletar</a>
+                </td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="5">Nenhum equipamento encontrado.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}
+
+{% block extra_css %}
+<style>
+    .equipamento-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 20px 0;
+        font-size: 18px;
+        text-align: left;
+    }
+    .equipamento-table th, .equipamento-table td {
+        padding: 12px;
+        border: 1px solid #ddd;
+    }
+    .equipamento-table th {
+        background-color: #f4f4f4;
+    }
+    .equipamento-table tr:nth-child(even) {
+        background-color: #f9f9f9;
+    }
+    .equipamento-table tr:hover {
+        background-color: #f1f1f1;
+    }
+    .btn {
+        text-decoration: none;
+        color: #fff;
+        padding: 8px 12px;
+        border-radius: 4px;
+        font-size: 14px;
+    }
+    .btn:hover {
+        opacity: 0.8;
+    }
+    .btn-danger {
+        background-color: #e74c3c;
+    }
+    .btn {
+        background-color: #3498db;
+    }
+</style>
+{% endblock %}
