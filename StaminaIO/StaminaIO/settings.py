@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'suplemento',
     'equipamento',
     'pessoa',
+    'dashboard',
 ]
 
 MIDDLEWARE = [

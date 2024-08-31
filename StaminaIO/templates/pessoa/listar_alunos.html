@@ -1,16 +1,63 @@
 {% extends '_base.html' %}
 
+{% block title %}Lista de Alunos{% endblock %}
+
 {% block content %}
-    <h2>Lista de Alunos</h2>
-    <a href="{% url 'listar_pessoas' %}">voltar</a>
-    <a href="{% url 'adicionar_aluno' %}">Adicionar Aluno</a>
-    <ul>
-        {% for aluno in alunos %}
-            <li>
-                {{ aluno.nome }} - {{ aluno.cpf }} - {{ aluno.idade }}
-                <a href="{% url 'editar_aluno' aluno.pk %}">Editar</a> 
-                <a href="{% url 'deletar_aluno' aluno.pk %}">Deletar</a>
-            </li>
+    <!-- Mensagens de Feedback -->
+    {% if messages %}
+      <div class="container mt-3">
+        {% for message in messages %}
+          <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+            {{ message }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+          </div>
         {% endfor %}
-    </ul>
+      </div>
+    {% endif %}
+
+    <h1>Lista de Alunos</h1>
+    <a href="{% url 'pessoa:adicionar_aluno' %}" class="btn btn-primary">Adicionar Aluno</a>
+    <table class="table aluno-table mt-3">
+        <thead>
+            <tr>
+                <th>Nome</th>
+                <th>CPF</th>
+                <th>Idade</th>
+                <th>Ações</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for aluno in alunos %}
+            <tr>
+                <td>{{ aluno.nome }}</td>
+                <td>{{ aluno.cpf }}</td>
+                <td>{{ aluno.idade }}</td>
+                <td>
+                    <a href="{% url 'pessoa:editar_aluno' aluno.pk %}" class="btn btn-warning">Editar</a>
+                    <a href="{% url 'pessoa:deletar_aluno' aluno.pk %}" class="btn btn-danger">Deletar</a>
+                </td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="4">Nenhum aluno encontrado.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}
+
+{% block scripts %}
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    // Seleciona todos os alertas
+    var alerts = document.querySelectorAll('.alert');
+    alerts.forEach(function(alert) {
+      // Define um timeout para esconder o alerta após 5 segundos
+      setTimeout(function() {
+        alert.classList.remove('show');
+        alert.classList.add('fade');
+      }, 5000);
+    });
+  });
+</script>
 {% endblock %}

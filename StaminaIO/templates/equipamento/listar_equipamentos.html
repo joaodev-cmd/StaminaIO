@@ -4,7 +4,7 @@
 
 {% block content %}
     <h1>Lista de Equipamentos</h1>
-    <a href="{% url 'adicionar_equipamento' %}" class="btn">Adicionar Equipamento</a>
+    <a href="{% url 'equipamento:adicionar_equipamento' %}" class="btn">Adicionar Equipamento</a>
     <table class="table">
         <thead>
             <tr>
@@ -23,8 +23,8 @@
                 <td>{{ equipamento.status }}</td>
                 <td>{{ equipamento.descricao }}</td>
                 <td>
-                    <a href="{% url 'editar_equipamento' equipamento.pk %}" class="btn">Editar</a>
-                    <a href="{% url 'deletar_equipamento' equipamento.pk %}" class="btn btn-danger">Deletar</a>
+                    <a href="{% url 'equipamento:editar_equipamento' equipamento.pk %}" class="btn">Editar</a>
+                    <a href="{% url 'equipamento:deletar_equipamento' equipamento.pk %}" class="btn btn-danger">Deletar</a>
                 </td>
             </tr>
             {% empty %}

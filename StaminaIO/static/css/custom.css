@@ -1,9 +1,9 @@
-.logo img {
-    max-width: 100px;
-    height: auto; /* Mantém a proporção da imagem */
-}
-
-.logo {
-    display: flex;
-    align-items: center;
-}
+.sidebar .sidebar-nav .nav-link.active {
+    background-color: #007bff !important; /* Cor de fundo para o item ativo */
+    color: #ffffff !important; /* Cor do texto para o item ativo */
+  }
+  
+  .sidebar .sidebar-nav .nav-link.active i {
+    color: #ffffff !important; /* Cor do ícone para o item ativo */
+  }
+  

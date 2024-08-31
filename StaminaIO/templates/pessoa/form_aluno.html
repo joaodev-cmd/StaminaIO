@@ -2,7 +2,7 @@
 
 {% block content %}
     <h2>Formulário de Aluno</h2>
-    <a href="{% url 'listar_pessoas' %}">voltar</a>
+    <a href="{% url 'pessoa:listar_alunos' %}">voltar</a>
     <form method="post">
         {% csrf_token %}
         {{ form.as_p }}

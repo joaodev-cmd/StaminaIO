@@ -14,7 +14,7 @@
 }
 
 body {
-  font-family: "Ubuntu", sans-serif;
+  font-family: "Chakra Petch", sans-serif;
   background: #f7fff6;
   color: #444444;
 }
@@ -35,7 +35,7 @@ h3,
 h4,
 h5,
 h6 {
-  font-family: "Ubuntu", sans-serif;
+  font-family: "Chakra Petch", sans-serif;
 }
 
 /*--------------------------------------------------------------
@@ -237,7 +237,7 @@ h6 {
   font-size: 18px;
   font-weight: 500;
   color: #012970;
-  font-family: "Poppins", sans-serif;
+  font-family: "Chakra Petch", sans-serif;
 }
 
 .card-title span {
@@ -257,7 +257,7 @@ h6 {
 /* Alerts */
 .alert-heading {
   font-weight: 500;
-  font-family: "Poppins", sans-serif;
+  font-family: "Chakra Petch", sans-serif;
   font-size: 20px;
 }
 
@@ -306,7 +306,7 @@ h6 {
 /* Breadcrumbs */
 .breadcrumb {
   font-size: 14px;
-  font-family: "Nunito", sans-serif;
+  font-family: "Ubuntu", sans-serif;
   color: #899bbd;
   font-weight: 600;
 }
@@ -373,7 +373,7 @@ h6 {
   font-size: 26px;
   font-weight: 700;
   color: #459020;
-  font-family: "Nunito", sans-serif;
+  font-family: "Chakra Petch", sans-serif;
 }
 
 .header {
@@ -655,6 +655,8 @@ h6 {
   }
 }
 
+
+
 .sidebar-nav {
   padding: 0;
   margin: 0;
@@ -756,6 +758,16 @@ h6 {
 .sidebar-nav .nav-content a.active i {
   background-color: #459020;
 }
+/* Estilo para o item de menu ativo */
+.sidebar-nav .nav-link.active {
+  background-color: #459020; /* Cor de fundo para o item ativo */
+  color: #ffffff; /* Cor do texto para o item ativo */
+}
+
+.sidebar-nav .nav-link.active i {
+  color: #ffffff; /* Cor do ícone para o item ativo */
+}
+
 
 /*--------------------------------------------------------------
 # Dashboard
