@@ -1,0 +1,64 @@
+{% extends '_base.html' %}
+
+{% block title %}Lista de Suplementos{% endblock %}
+
+{% block content %}
+    <!-- Mensagens de Feedback -->
+    {% if messages %}
+      <div class="container mt-3">
+        {% for message in messages %}
+          <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+            {{ message }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+          </div>
+        {% endfor %}
+      </div>
+    {% endif %}
+
+    <h1>Lista de Suplementos</h1>
+    <a href="{% url 'suplemento:adicionar_suplemento' %}" class="btn btn-primary">Adicionar Suplemento</a>
+    <table class="table suplemento-table mt-3">
+        <thead>
+            <tr>
+                <th>Nome</th>
+                <th>Marca</th>
+                <th>Preço</th>
+                <th>Quantidade</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for suplemento in suplementos %}
+            <tr>
+                <td>{{ suplemento.nome }}</td>
+                <td>{{ suplemento.marca }}</td>
+                <td>{{ suplemento.preco }}</td>
+                <td>{{ suplemento.quantidade }}</td>
+                <td>
+                    <a href="{% url 'suplemento:editar_suplemento' suplemento.pk %}" class="btn btn-warning">Editar</a>
+                    <a href="{% url 'suplemento:deletar_suplemento' suplemento.pk %}" class="btn btn-danger">Deletar</a>
+                </td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="4">Nenhum suplemento encontrado.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}
+
+{% block scripts %}
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    // Seleciona todos os alertas
+    var alerts = document.querySelectorAll('.alert');
+    alerts.forEach(function(alert) {
+      // Define um timeout para esconder o alerta após 5 segundos
+      setTimeout(function() {
+        alert.classList.remove('show');
+        alert.classList.add('fade');
+      }, 5000);
+    });
+  });
+</script>
+{% endblock %}

@@ -1,0 +1,12 @@
+{% extends '_base.html' %}
+
+{% block content %}
+    <h2>Formulário de Suplemento</h2>
+    <a href="{% url 'suplemento:listar_suplementos' %}">voltar</a>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Salvar</button>
+    </form>
+{% endblock %}
+

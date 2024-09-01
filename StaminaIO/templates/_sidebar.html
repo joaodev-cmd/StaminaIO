@@ -1,9 +1,7 @@
 {% load static %}
 <!-- ======= Sidebar ======= -->
 <aside id="sidebar" class="sidebar">
-
   <ul class="sidebar-nav" id="sidebar-nav">
-
     <li class="nav-item">
       <a class="nav-link {% if request.resolver_match.url_name == 'index' %}active{% endif %}" href="{% url 'index' %}">
         <i class="bi bi-house-door"></i> <!-- Ícone para Dashboard -->
@@ -34,12 +32,10 @@
     </li>
 
     <li class="nav-item">
-      <a class="nav-link" href="">
+      <a class="nav-link {% if request.resolver_match.url_name == 'suplemento:listar_suplementos' %}active{% endif %}" href="{% url 'suplemento:listar_suplementos' %}">
         <i class="bi bi-capsule"></i> <!-- Ícone para Suplementos -->
         <span>Suplementos</span>
       </a>
     </li>
-
   </ul>
-
 </aside>
