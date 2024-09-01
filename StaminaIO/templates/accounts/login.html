@@ -1,0 +1,34 @@
+<!-- templates/accounts/login.html -->
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}"> <!-- Se estiver usando CSS -->
+</head>
+<body>
+    <h1>Login</h1>
+
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }} <!-- Exibe o formulário como parágrafos -->
+        <button type="submit">Login</button>
+    </form>
+
+    {% if form.errors %}
+        <div class="alert alert-danger">
+            <ul>
+                {% for field in form %}
+                    {% for error in field.errors %}
+                        <li>{{ error }}</li>
+                    {% endfor %}
+                {% endfor %}
+            </ul>
+        </div>
+    {% endif %}
+
+    <a href="{% url 'add-user' %}">Registrar</a> <!-- Link para a página de registro -->
+</body>
+</html>
