@@ -2,11 +2,14 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib import messages
 from .models import Equipamento
 from .forms import EquipamentoForm
+from django.contrib.auth.decorators import login_required, user_passes_test
 
+@login_required
 def listar_equipamentos(request):
     equipamentos = Equipamento.objects.all()
     return render(request, 'equipamento/listar_equipamentos.html', {'equipamentos': equipamentos})
 
+@login_required
 def adicionar_equipamento(request):
     if request.method == 'POST':
         form = EquipamentoForm(request.POST)
@@ -20,6 +23,7 @@ def adicionar_equipamento(request):
         form = EquipamentoForm()
     return render(request, 'equipamento/form_equipamento.html', {'form': form})
 
+@login_required
 def editar_equipamento(request, pk):
     equipamento = get_object_or_404(Equipamento, pk=pk)
     if request.method == 'POST':
@@ -34,6 +38,7 @@ def editar_equipamento(request, pk):
         form = EquipamentoForm(instance=equipamento)
     return render(request, 'equipamento/form_equipamento.html', {'form': form})
 
+@login_required
 def deletar_equipamento(request, pk):
     equipamento = get_object_or_404(Equipamento, pk=pk)
     if request.method == 'POST':

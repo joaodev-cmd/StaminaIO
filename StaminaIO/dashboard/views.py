@@ -2,7 +2,9 @@ from django.shortcuts import render
 from pessoa.models import Aluno, Funcionario
 from equipamento.models import Equipamento
 from suplemento.models import Suplemento
+from django.contrib.auth.decorators import login_required, user_passes_test
 
+@login_required
 def index(request):
     total_alunos = Aluno.objects.count()
     total_funcionarios = Funcionario.objects.count()

@@ -2,11 +2,14 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib import messages
 from .models import Suplemento
 from .forms import SuplementoForm
+from django.contrib.auth.decorators import login_required, user_passes_test
 
+@login_required
 def listar_suplementos(request):
     suplementos = Suplemento.objects.all()
     return render(request, 'suplemento/listar_suplementos.html', {'suplementos': suplementos})
 
+@login_required
 def adicionar_suplemento(request):
     if request.method == 'POST':
         form = SuplementoForm(request.POST)
@@ -20,6 +23,7 @@ def adicionar_suplemento(request):
         form = SuplementoForm()
     return render(request, 'suplemento/form_suplemento.html', {'form': form})
 
+@login_required
 def editar_suplemento(request, pk):
     suplemento = get_object_or_404(Suplemento, pk=pk)
     if request.method == 'POST':
@@ -34,6 +38,7 @@ def editar_suplemento(request, pk):
         form = SuplementoForm(instance=suplemento)
     return render(request, 'suplemento/form_suplemento.html', {'form': form})
 
+@login_required
 def deletar_suplemento(request, pk):
     suplemento = get_object_or_404(Suplemento, pk=pk)
     if request.method == 'POST':
