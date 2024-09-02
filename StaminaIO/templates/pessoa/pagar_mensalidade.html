@@ -1,0 +1,19 @@
+{% extends '_base.html' %}
+
+{% block title %}Pagar Mensalidade{% endblock %}
+
+{% block content %}
+    <h1>Pagar Mensalidade</h1>
+    <form method="post" action="{% url 'pessoa:pagar_mensalidade' aluno.id %}">
+        {% csrf_token %}
+        <div class="mb-3">
+            <label for="valor" class="form-label">Valor</label>
+            <input type="number" step="0.01" class="form-control" id="valor" name="valor" required>
+        </div>
+        <div class="mb-3">
+            <label for="data_pagamento" class="form-label">Data do Pagamento</label>
+            <input type="date" class="form-control" id="data_pagamento" name="data_pagamento" required>
+        </div>
+        <button type="submit" class="btn btn-primary">Pagar</button>
+    </form>
+{% endblock %}

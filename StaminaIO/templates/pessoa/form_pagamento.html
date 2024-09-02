@@ -1,0 +1,13 @@
+<!-- form_pagamento.html -->
+{% extends '_base.html' %}
+
+{% block title %}Pagamento da Mensalidade{% endblock %}
+
+{% block content %}
+  <h1>Pagamento da Mensalidade</h1>
+  <form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="btn btn-primary">Pagar</button>
+  </form>
+{% endblock %}

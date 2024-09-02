@@ -16,6 +16,12 @@
     {% endif %}
 
     <h1>Lista de Alunos</h1>
+    <form method="GET" action="{% url 'pessoa:listar_alunos' %}" class="mb-3">
+        <div class="input-group">
+            <input type="text" name="q" class="form-control" placeholder="Buscar aluno por nome" value="{{ request.GET.q }}">
+            <button type="submit" class="btn btn-outline-secondary">Buscar</button>
+        </div>
+    </form>
     <a href="{% url 'pessoa:adicionar_aluno' %}" class="btn btn-primary">Adicionar Aluno</a>
     <table class="table aluno-table mt-3">
         <thead>
@@ -35,6 +41,7 @@
                 <td>
                     <a href="{% url 'pessoa:editar_aluno' aluno.pk %}" class="btn btn-warning">Editar</a>
                     <a href="{% url 'pessoa:deletar_aluno' aluno.pk %}" class="btn btn-danger">Deletar</a>
+                    <a href="{% url 'pessoa:pagar_mensalidade' aluno.pk %}" class="btn btn-success">Pagar Mensalidade</a>
                 </td>
             </tr>
             {% empty %}
