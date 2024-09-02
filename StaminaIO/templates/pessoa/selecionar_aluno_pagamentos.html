@@ -1,0 +1,19 @@
+{% extends '_base.html' %}
+
+{% block title %}Selecionar Aluno para Pagamentos{% endblock %}
+
+{% block content %}
+    <h1>Selecionar Aluno para Ver Pagamentos</h1>
+    
+    <form method="get" action="{% url 'pessoa:selecionar_aluno_pagamentos' %}">
+        <div class="mb-3">
+            <label for="aluno" class="form-label">Escolha um Aluno</label>
+            <select name="aluno_id" id="aluno" class="form-select">
+                {% for aluno in alunos %}
+                    <option value="{{ aluno.id }}">{{ aluno.nome }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <button type="submit" class="btn btn-primary">Ver Pagamentos</button>
+    </form>
+{% endblock %}

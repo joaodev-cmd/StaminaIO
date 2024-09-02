@@ -1,0 +1,16 @@
+{% extends '_base.html' %}
+
+{% block title %}Pagar Mensalidade{% endblock %}
+
+{% block content %}
+    <h1>Pagar Mensalidade</h1>
+    
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <input type="hidden" name="aluno" value="{{ aluno.pk }}">
+        <button type="submit" class="btn btn-primary">Pagar</button>
+    </form>
+
+    <a href="{% url 'pessoa:listar_alunos' %}" class="btn btn-secondary mt-3">Voltar</a>
+{% endblock %}
