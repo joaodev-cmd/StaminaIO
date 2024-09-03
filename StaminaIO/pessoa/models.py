@@ -1,7 +1,6 @@
 from django.db import models
 from django.utils import timezone
 
-
 class Pessoa(models.Model):
     nome = models.CharField(max_length=100)
     cpf = models.CharField(max_length=11, unique=True)
@@ -11,12 +10,18 @@ class Pessoa(models.Model):
         abstract = True
 
 class Aluno(Pessoa):
+    MATRICULADO = 'M'
+    NAO_MATRICULADO = 'NM'
+    STATUS_CHOICES = [
+        (MATRICULADO, 'Matriculado'),
+        (NAO_MATRICULADO, 'Não Matriculado'),
+    ]
+    
     peso = models.FloatField()
     endereco = models.CharField(max_length=255)
-    status = models.BooleanField(default=True)
+    status = models.CharField(max_length=2, choices=STATUS_CHOICES, default=MATRICULADO)
     telefone = models.CharField(max_length=15)
     altura = models.FloatField()
-    plano = models.CharField(max_length=50)
 
     def __str__(self):
         return self.nome

@@ -11,12 +11,16 @@ from .forms import PagamentoForm
 @login_required
 def listar_alunos(request):
     query = request.GET.get('q')
-    if query:
-        alunos = Aluno.objects.filter(nome__icontains=query)
-    else:
-        alunos = Aluno.objects.all()
+    status_filter = request.GET.get('status')
+    
+    alunos = Aluno.objects.all()
 
-    return render(request, 'pessoa/listar_alunos.html', {'alunos': alunos})
+    if query:
+        alunos = alunos.filter(nome__icontains=query)
+    if status_filter:
+        alunos = alunos.filter(status=status_filter)
+
+    return render(request, 'pessoa/listar_alunos.html', {'alunos': alunos, 'status_filter': status_filter})
 
 @login_required
 def adicionar_aluno(request):

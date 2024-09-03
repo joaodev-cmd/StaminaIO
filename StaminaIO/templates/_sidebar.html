@@ -11,35 +11,35 @@
     <li class="nav-heading">Páginas</li>
 
     <li class="nav-item">
-      <a class="nav-link {% if request.resolver_match.url_name == 'pessoa:listar_funcionarios' %}active{% endif %}" href="{% url 'pessoa:listar_funcionarios' %}">
+      <a class="nav-link {% if request.resolver_match.url_name == 'listar_funcionarios' %}active{% endif %}" href="{% url 'pessoa:listar_funcionarios' %}">
         <i class="bi bi-person-fill"></i>
         <span>Funcionários</span>
       </a>
     </li>
 
     <li class="nav-item">
-      <a class="nav-link {% if request.resolver_match.url_name == 'pessoa:listar_alunos' %}active{% endif %}" href="{% url 'pessoa:listar_alunos' %}">
+      <a class="nav-link {% if request.resolver_match.url_name == 'listar_alunos' %}active{% endif %}" href="{% url 'pessoa:listar_alunos' %}">
         <i class="bi bi-person-lines-fill"></i>
         <span>Alunos</span>
       </a>
     </li>
 
     <li class="nav-item">
-      <a class="nav-link {% if request.resolver_match.url_name == 'equipamento:listar_equipamentos' %}active{% endif %}" href="{% url 'equipamento:listar_equipamentos' %}">
+      <a class="nav-link {% if request.resolver_match.url_name == 'listar_equipamentos' %}active{% endif %}" href="{% url 'equipamento:listar_equipamentos' %}">
         <i class="bi bi-box-seam"></i>
         <span>Equipamentos</span>
       </a>
     </li>
 
     <li class="nav-item">
-      <a class="nav-link {% if request.resolver_match.url_name == 'suplemento:listar_suplementos' %}active{% endif %}" href="{% url 'suplemento:listar_suplementos' %}">
+      <a class="nav-link {% if request.resolver_match.url_name == 'listar_suplementos' %}active{% endif %}" href="{% url 'suplemento:listar_suplementos' %}">
         <i class="bi bi-capsule"></i>
         <span>Suplementos</span>
       </a>
     </li>
 
     <li class="nav-item">
-      <a class="nav-link {% if request.resolver_match.url_name == 'pessoa:selecionar_aluno_pagamentos' %}active{% endif %}" href="{% url 'pessoa:selecionar_aluno_pagamentos' %}">
+      <a class="nav-link {% if request.resolver_match.url_name == 'selecionar_aluno_pagamentos' %}active{% endif %}" href="{% url 'pessoa:selecionar_aluno_pagamentos' %}">
         <i class="bi bi-currency-dollar"></i>
         <span>Pagamentos</span>
       </a>
