@@ -1243,3 +1243,16 @@ h6 {
   font-size: 13px;
   color: #459020;
 }
+
+form p {
+  margin-bottom: 15px;
+}
+
+form p label {
+  display: block;
+  margin-bottom: 5px;
+}
+
+form p input {
+  width: 100%;
+}
