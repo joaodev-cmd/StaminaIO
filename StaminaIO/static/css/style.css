@@ -1253,6 +1253,6 @@ form p label {
   margin-bottom: 5px;
 }
 
-form p input {
+.inputRegistro input{
   width: 100%;
 }
