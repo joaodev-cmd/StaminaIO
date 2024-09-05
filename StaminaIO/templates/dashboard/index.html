@@ -3,50 +3,91 @@
 {% block content %}
 <div class="container mt-5">
     <div class="row">
+        <!-- Alunos -->
         <div class="col-md-6 mb-4">
             <a href="{% url 'pessoa:listar_alunos' %}" class="text-decoration-none text-dark">
-                <div class="card text-center h-100">
+                <div class="card text-center h-100 shadow-sm border-0 rounded-lg">
                     <div class="card-body d-flex flex-column justify-content-center align-items-center">
                         <h5 class="card-title">Alunos</h5>
-                        <i class="fas fa-users fa-3x mt-3"></i>
-                        <p class="card-text">{{ total_alunos }} registros</p>
+                        <i class="fas fa-users fa-3x mt-3 text-primary"></i>
+                        <p class="card-text mt-2">{{ total_alunos }} registros</p>
                     </div>
                 </div>
             </a>
         </div>
+        <!-- Funcionários -->
         <div class="col-md-6 mb-4">
             <a href="{% url 'pessoa:listar_funcionarios' %}" class="text-decoration-none text-dark">
-                <div class="card text-center h-100">
+                <div class="card text-center h-100 shadow-sm border-0 rounded-lg">
                     <div class="card-body d-flex flex-column justify-content-center align-items-center">
                         <h5 class="card-title">Funcionários</h5>
-                        <i class="fas fa-user-tie fa-3x mt-3"></i>
-                        <p class="card-text">{{ total_funcionarios }} registros</p>
+                        <i class="fas fa-user-tie fa-3x mt-3 text-success"></i>
+                        <p class="card-text mt-2">{{ total_funcionarios }} registros</p>
                     </div>
                 </div>
             </a>
         </div>
+        <!-- Equipamentos -->
         <div class="col-md-6 mb-4">
             <a href="{% url 'equipamento:listar_equipamentos' %}" class="text-decoration-none text-dark">
-                <div class="card text-center h-100">
+                <div class="card text-center h-100 shadow-sm border-0 rounded-lg">
                     <div class="card-body d-flex flex-column justify-content-center align-items-center">
                         <h5 class="card-title">Equipamentos</h5>
-                        <i class="fas fa-dumbbell fa-3x mt-3"></i>
-                        <p class="card-text">{{ total_equipamentos }} registros</p>
+                        <i class="fas fa-dumbbell fa-3x mt-3 text-warning"></i>
+                        <p class="card-text mt-2">{{ total_equipamentos }} registros</p>
                     </div>
                 </div>
             </a>
         </div>
+        <!-- Suplementos -->
         <div class="col-md-6 mb-4">
             <a href="{% url 'suplemento:listar_suplementos' %}" class="text-decoration-none text-dark">
-                <div class="card text-center h-100">
+                <div class="card text-center h-100 shadow-sm border-0 rounded-lg">
                     <div class="card-body d-flex flex-column justify-content-center align-items-center">
                         <h5 class="card-title">Suplementos</h5>
-                        <i class="fas fa-capsules fa-3x mt-3"></i>
-                        <p class="card-text">{{ total_suplementos }} registros</p>
+                        <i class="fas fa-capsules fa-3x mt-3 text-danger"></i>
+                        <p class="card-text mt-2">{{ total_suplementos }} registros</p>
                     </div>
                 </div>
             </a>
         </div>
     </div>
 </div>
+
+<style>
+    .card {
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0);
+    }
+
+    .card-title {
+        font-weight: bold;
+        color: #333;
+    }
+
+    .card-text {
+        font-size: 1.1rem;
+        color: #666;
+    }
+
+    .text-primary {
+        color: #007bff !important;
+    }
+
+    .text-success {
+        color: #28a745 !important;
+    }
+
+    .text-warning {
+        color: #ffc107 !important;
+    }
+
+    .text-danger {
+        color: #dc3545 !important;
+    }
+</style>
 {% endblock %}

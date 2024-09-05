@@ -1,3 +1,4 @@
+from pyexpat.errors import messages
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
 from .forms import UsuarioForm
@@ -11,7 +12,7 @@ def createusu(request):
         form = UsuarioForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect('login')  # Redireciona para a página de login após o registro
+            return redirect('index')
         else:
             return render(request, 'accounts/register.html', {'form': form})
     else:
@@ -19,16 +20,13 @@ def createusu(request):
         return render(request, 'accounts/register.html', {'form': form})
 
 
-def success_page(request):
-    return render(request, 'accounts/success.html')
-
 def login_view(request):
     if request.method == 'POST':
         form = AuthenticationForm(data=request.POST)
         if form.is_valid():
             user = form.get_user()
             login(request, user)
-            return redirect('index')  # Redireciona para a URL 'index' do app dashboard
+            return redirect('index')  
         else:
             return render(request, 'accounts/login.html', {'form': form})
     else:
@@ -37,4 +35,4 @@ def login_view(request):
 
 def logout_view(request):
     logout(request)
-    return redirect('login')  # Redireciona para a página de login após o logout
+    return redirect('accounts:login') 
