@@ -13,10 +13,10 @@ class FuncionarioForm(forms.ModelForm):
 
 class PagamentoForm(forms.ModelForm):
     VALORES_PAGAMENTO = [
-        (80, 'R$ 80,00'),
-        (225, 'R$ 225,00'),
-        (420, 'R$ 420,00'),
-        (780, 'R$780,00'),
+        (80, 'Plano Mensal - R$ 80,00'),
+        (225, 'Plano Trismestral - R$ 225,00'),
+        (420, 'Plano Semestral - R$ 420,00'),
+        (780, 'Plano Anual - R$780,00'),
     ]
     
     valor = forms.ChoiceField(choices=VALORES_PAGAMENTO, label="Valor do Pagamento", widget=forms.Select(attrs={'class': 'form-control'}))
@@ -27,3 +27,6 @@ class PagamentoForm(forms.ModelForm):
         widgets = {
             'aluno': forms.Select(attrs={'class': 'form-control'}),
         }
+        
+class ConfirmPasswordForm(forms.Form):
+    password = forms.CharField(widget=forms.PasswordInput, label='Digite sua senha para confirmar')

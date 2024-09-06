@@ -1,0 +1,17 @@
+{% extends '_base.html' %}
+
+{% block title %}Confirmar Deleção de Pagamento{% endblock %}
+
+{% block content %}
+<h1>Confirmar Deleção de Pagamento</h1>
+
+<p>Você está prestes a deletar o pagamento de R$ {{ pagamento.valor }} realizado em {{ pagamento.data_pagamento }}.</p>
+
+<form method="POST">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="btn btn-danger">Confirmar Deleção</button>
+    <a href="{% url 'pessoa:listar_pagamentos_aluno' pagamento.aluno.id %}" class="btn btn-secondary">Cancelar</a>
+</form>
+
+{% endblock %}

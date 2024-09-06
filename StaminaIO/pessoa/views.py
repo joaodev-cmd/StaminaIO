@@ -6,6 +6,7 @@ from django.contrib.auth.decorators import login_required, user_passes_test
 from django.utils import timezone
 from .models import Aluno, Pagamento
 from .forms import PagamentoForm
+from .forms import ConfirmPasswordForm
 
 
 @login_required
@@ -103,7 +104,7 @@ def deletar_funcionario(request, pk):
         return redirect('pessoa:listar_funcionarios')
     return render(request, 'pessoa/confirmar_deletar.html', {'object': funcionario})
 
-
+@login_required
 def pagar_mensalidade(request, aluno_id):
     aluno = get_object_or_404(Aluno, pk=aluno_id)
     if request.method == 'POST':
@@ -147,3 +148,27 @@ def listar_pagamentos_aluno(request, aluno_id):
         pagamentos = pagamentos.filter(valor__lte=max_valor)
 
     return render(request, 'pessoa/listar_pagamentos.html', {'aluno': aluno, 'pagamentos': pagamentos})
+
+@login_required
+def deletar_pagamento(request, pagamento_id):
+    pagamento = get_object_or_404(Pagamento, pk=pagamento_id)
+    aluno = pagamento.aluno
+
+    if request.method == 'POST':
+        form = ConfirmPasswordForm(request.POST)
+        if form.is_valid():
+            password = form.cleaned_data['password']
+            
+            # Verifica se a senha está correta
+            if request.user.check_password(password):
+                pagamento.delete()
+                messages.success(request, 'Pagamento deletado com sucesso!')
+                return redirect('pessoa:listar_pagamentos_aluno', aluno_id=aluno.id)
+            else:
+                messages.error(request, 'Senha incorreta. Tente novamente.')
+        else:
+            messages.error(request, 'Erro no formulário. Verifique os dados e tente novamente.')
+    else:
+        form = ConfirmPasswordForm()
+
+    return render(request, 'pessoa/confirmar_delecao_pagamento.html', {'pagamento': pagamento, 'form': form})

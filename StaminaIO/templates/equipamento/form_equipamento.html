@@ -6,8 +6,33 @@
     <h1>{{ form.instance.pk|yesno:"Editar Equipamento,Adicionar Equipamento" }}</h1>
     <form method="post">
         {% csrf_token %}
-        {{ form.as_p }}
+        {{ form.as_p}}
         <button type="submit">Salvar</button>
     </form>
     <a href="{% url 'equipamento:listar_equipamentos' %}">Voltar à lista de equipamentos</a>
+
+    <script type="text/javascript">
+        function atualizarStatus() {
+            var quantidade = parseInt(document.getElementById('id_quantidade').value);
+            var statusField = document.getElementById('id_status');
+            var options = '';
+
+            // Gera as opções para o status com base na quantidade
+            for (var i = 0; i <= quantidade; i++) {
+                var ativos = i;
+                var manutencao = quantidade - i;
+                options += '<option value="' + ativos + ' Ativos - ' + manutencao + ' Manutenção">' + ativos + ' Ativos - ' + manutencao + ' Manutenção</option>';
+            }
+
+            statusField.innerHTML = options;
+        }
+
+        document.addEventListener('DOMContentLoaded', function () {
+            var quantidadeField = document.getElementById('id_quantidade');
+            quantidadeField.addEventListener('input', atualizarStatus);
+
+            // Atualiza as opções na carga inicial se o campo de quantidade tiver valor
+            atualizarStatus();
+        });
+    </script>
 {% endblock %}

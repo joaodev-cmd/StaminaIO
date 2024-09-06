@@ -11,6 +11,7 @@ urlpatterns = [
 
     # URLs para pagamentos
     path('alunos/pagar/<int:aluno_id>/', views.pagar_mensalidade, name='pagar_mensalidade'),
+    path('pagamento/<int:pagamento_id>/deletar/', views.deletar_pagamento, name='deletar_pagamento'),
     path('alunos/<int:aluno_id>/pagamentos/', views.listar_pagamentos_aluno, name='listar_pagamentos_aluno'),
     path('alunos/selecionar-pagamentos/', views.selecionar_aluno_pagamentos, name='selecionar_aluno_pagamentos'),
    
