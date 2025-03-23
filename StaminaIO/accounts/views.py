@@ -1,11 +1,12 @@
 from pyexpat.errors import messages
-from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
 from .forms import UsuarioForm
 from django.contrib.auth.forms import AuthenticationForm
-
 from django.shortcuts import render, redirect
-from .forms import UsuarioForm
+from rest_framework.authtoken.views import ObtainAuthToken
+from rest_framework.authtoken.models import Token
+from rest_framework.response import Response
+from rest_framework.decorators import api_view
 
 def createusu(request):
     if request.method == 'POST':
@@ -36,3 +37,10 @@ def login_view(request):
 def logout_view(request):
     logout(request)
     return redirect('accounts:login') 
+
+@api_view(['POST'])
+def custom_auth_token(request):
+    view = ObtainAuthToken.as_view()
+    response = view(request)
+    token, created = Token.objects.get_or_create(user=response.data['user_id'])
+    return Response({'token': token.key})
