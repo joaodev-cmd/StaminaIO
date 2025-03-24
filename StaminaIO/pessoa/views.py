@@ -1,14 +1,15 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib import messages
-from .models import Aluno, Funcionario
-from .forms import AlunoForm, FuncionarioForm
-from django.contrib.auth.decorators import login_required, user_passes_test
+from .models import Aluno, Funcionario, Pagamento
+from .forms import AlunoForm, FuncionarioForm, PagamentoForm, ConfirmPasswordForm
+from django.contrib.auth.decorators import login_required
 from django.utils import timezone
-from .models import Aluno, Pagamento
-from .forms import PagamentoForm
-from .forms import ConfirmPasswordForm
+from rest_framework import viewsets
+from rest_framework.permissions import IsAuthenticated
+from rest_framework.authentication import TokenAuthentication
+from .serializers import AlunoSerializer, FuncionarioSerializer, PagamentoSerializer
 
-
+# Views para Alunos
 @login_required
 def listar_alunos(request):
     query = request.GET.get('q')
@@ -61,7 +62,8 @@ def deletar_aluno(request, pk):
         return redirect('pessoa:listar_alunos')
     return render(request, 'pessoa/confirmar_deletar.html', {'object': aluno})
 
-@login_required# Views para Funcionario
+# Views para Funcionários
+@login_required
 def listar_funcionarios(request):
     funcionarios = Funcionario.objects.all()
     return render(request, 'pessoa/listar_funcionarios.html', {'funcionarios': funcionarios})
@@ -104,6 +106,7 @@ def deletar_funcionario(request, pk):
         return redirect('pessoa:listar_funcionarios')
     return render(request, 'pessoa/confirmar_deletar.html', {'object': funcionario})
 
+# Views para Pagamentos
 @login_required
 def pagar_mensalidade(request, aluno_id):
     aluno = get_object_or_404(Aluno, pk=aluno_id)
@@ -124,21 +127,15 @@ def pagar_mensalidade(request, aluno_id):
 
 @login_required
 def selecionar_aluno_pagamentos(request):
-    # Obtém o parâmetro de busca do nome
     nome = request.GET.get('nome', '')
-
-    # Filtra alunos com base no nome fornecido
     alunos = Aluno.objects.filter(nome__icontains=nome)
-
     return render(request, 'pessoa/selecionar_aluno_pagamentos.html', {'alunos': alunos})
-
 
 @login_required
 def listar_pagamentos_aluno(request, aluno_id):
     aluno = get_object_or_404(Aluno, pk=aluno_id)
     pagamentos = Pagamento.objects.filter(aluno=aluno)
-
-    # Adiciona filtros por valor
+    
     min_valor = request.GET.get('min_valor')
     max_valor = request.GET.get('max_valor')
 
@@ -158,8 +155,6 @@ def deletar_pagamento(request, pagamento_id):
         form = ConfirmPasswordForm(request.POST)
         if form.is_valid():
             password = form.cleaned_data['password']
-            
-            # Verifica se a senha está correta
             if request.user.check_password(password):
                 pagamento.delete()
                 messages.success(request, 'Pagamento deletado com sucesso!')
@@ -172,3 +167,19 @@ def deletar_pagamento(request, pagamento_id):
         form = ConfirmPasswordForm()
 
     return render(request, 'pessoa/confirmar_delecao_pagamento.html', {'pagamento': pagamento, 'form': form})
+
+# ViewSets para APIs
+class AlunoViewSet(viewsets.ModelViewSet):
+    queryset = Aluno.objects.all()
+    serializer_class = AlunoSerializer
+    permission_classes = [IsAuthenticated]
+
+class FuncionarioViewSet(viewsets.ModelViewSet):
+    queryset = Funcionario.objects.all()
+    serializer_class = FuncionarioSerializer
+    permission_classes = [IsAuthenticated]
+
+class PagamentoViewSet(viewsets.ModelViewSet):
+    queryset = Pagamento.objects.all()
+    serializer_class = PagamentoSerializer
+    permission_classes = [IsAuthenticated]

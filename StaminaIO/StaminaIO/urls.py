@@ -10,6 +10,7 @@ urlpatterns = [
     path('equipamento/', include('equipamento.urls')),
     path('suplemento/', include('suplemento.urls')),
     path('accounts/', include('accounts.urls')),
-    path('api/', include('equipamento.urls')),  # Adiciona os endpoints da API de Equipamento
+    path('api/', include('equipamento.urls')),
+    path('api/pessoa/', include('pessoa.urls')),
 
 ]
