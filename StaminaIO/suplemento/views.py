@@ -1,7 +1,12 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib import messages
+
+from .serializers import SuplementoSerializer
 from .models import Suplemento
 from .forms import SuplementoForm
+from rest_framework import viewsets
+from rest_framework.permissions import IsAuthenticated
+from rest_framework.authentication import TokenAuthentication
 from django.contrib.auth.decorators import login_required, user_passes_test
 
 @login_required
@@ -46,3 +51,8 @@ def deletar_suplemento(request, pk):
         messages.success(request, 'Suplemento deletado com sucesso!')
         return redirect('suplemento:listar_suplementos')
     return render(request, 'suplemento/confirmar_deletar.html', {'object': suplemento})
+
+class SuplementoViewSet(viewsets.ModelViewSet):
+    queryset = Suplemento.objects.all()
+    serializer_class = SuplementoSerializer
+    permission_classes = [IsAuthenticated] 

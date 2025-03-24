@@ -54,6 +54,6 @@ def deletar_equipamento(request, pk):
 class EquipamentoViewSet(viewsets.ModelViewSet):
     queryset = Equipamento.objects.all()
     serializer_class = EquipamentoSerializer
-    permission_classes = [IsAuthenticated]  # 🔒 Protege a API
+    permission_classes = [IsAuthenticated]
 
 
